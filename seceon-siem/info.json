@@ -7,7 +7,7 @@
   "contributor": "Puja Kumari",
   "cs_approved": false,
   "cs_compatible": true,
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/seceon-siem/100/seceon-siem-v1-0-0",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "category": [
@@ -17,8 +17,8 @@
     "fields": [
       {
         "title": "Server URL",
-        "description": "Specify the server URL of the Doppel server to connect and perform automated operations.",
-        "tooltip": "Specify the server URL of the Doppel server to connect and perform automated operations.",
+        "description": "Specify the base URL of the Seceon SIEM server.",
+        "tooltip": "Specify the base URL of the Seceon SIEM server.",
         "type": "text",
         "name": "serverURL",
         "required": true,
@@ -28,8 +28,8 @@
       },
       {
         "title": "API Token",
-        "tooltip": "Specify the API token to connect to the endpoint and perform automated operations.",
-        "description": "Specify the API token to connect to the endpoint and perform automated operations.",
+        "tooltip": "Specify the Seceon SIEM API key used to authenticate API requests.",
+        "description": "Specify the Seceon SIEM API key used to authenticate API requests.",
         "type": "password",
         "name": "aPIToken",
         "required": true,
@@ -38,18 +38,18 @@
       },
       {
         "title": "Tenant ID",
-        "description": "Specify the tenant ID to connect to the endpoint and perform automated operations.",
+        "description": "Specify the default tenant ID to use for API calls. This parameter is required when using a Global Auth Key covering multiple tenants. Optional when using a tenant-specify auth key.",
         "type": "text",
         "name": "tenantID",
         "required": false,
         "visible": true,
         "editable": true,
-        "tooltip": "Default Tenant ID for API calls. Required when using a Global Auth Key that covers multiple tenants. Optional when using a Tenant-specific Auth Key."
+        "tooltip": "Specify the default tenant ID to use for API calls. This parameter is required when using a Global Auth Key covering multiple tenants. Optional when using a tenant-specify auth key."
       },
       {
         "title": "Verify SSL",
-        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is selected, i.e., set to true",
-        "tooltip": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is selected, i.e., set to true",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
         "type": "checkbox",
         "name": "verifySSL",
         "required": false,
@@ -63,20 +63,20 @@
     {
       "title": "Get All Alerts",
       "operation": "retrieve_alerts",
-      "description": "Searches for alerts in Seceon OTM using one or more filter criteria.",
+      "description": "Retrieves alerts from Seceon OTM based on one or more filter criteria.",
       "enabled": true,
       "category": "investigation",
       "annotation": "retrieve_alerts",
       "parameters": [
         {
           "title": "Alert Type",
-          "description": "Select one or more alert categories to filter alerts. Possible values are Brute Force Attack, Malware Infected Host, and Policy Violation.",
+          "description": "(Optional) Select one or more alert categories to filter the results. Supported values are Brute Force Attack, Malware Infected Host, and Policy Violation.",
           "type": "multiselect",
           "name": "alertType",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Select one or more alert categories to filter alerts. Possible values are Brute Force Attack, Malware Infected Host, and Policy Violation.",
+          "tooltip": "Select one or more alert categories to filter the results. Supported values are Brute Force Attack, Malware Infected Host, and Policy Violation.",
           "options": [
             "Brute Force Attack",
             "Malware Infected Host",
@@ -85,13 +85,13 @@
         },
         {
           "title": "Alert Severity",
-          "description": "Select one or more alert severity level to filter alerts. Possible values are CRITICAL, MAJOR, and MINOR.",
+          "description": "(Optional) Select one or more severity levels to filter the results. Supported values are CRITICAL, MAJOR, and MINOR.",
           "type": "multiselect",
           "name": "alertSeverity",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Select one or more alert severity level to filter alerts. Possible values are CRITICAL, MAJOR, and MINOR.",
+          "tooltip": "Select one or more severity levels to filter the results. Supported values are CRITICAL, MAJOR, and MINOR.",
           "options": [
             "CRITICAL",
             "MAJOR",
@@ -100,13 +100,13 @@
         },
         {
           "title": "Alert Status",
-          "description": "Select one or more alert status to filter alerts. Possible values are OPEN and CLOSED.",
+          "description": "(Optional) Select one or more alert statuses to filter the results. Supported values are OPEN and CLOSED.",
           "type": "multiselect",
           "name": "alertStatus",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Select one or more alert status to filter alerts. Possible values are OPEN and CLOSED.",
+          "tooltip": "Select one or more alert statuses to filter the results. Supported values are OPEN and CLOSED.",
           "options": [
             "OPEN",
             "CLOSED"
@@ -114,85 +114,85 @@
         },
         {
           "title": "Confidence Score Range",
-          "description": "Filter by confidence range (0-100) indicating how certain the system is about the threat.",
+          "description": "(Optional) Specify a confidence score range between 0 and 100 to filter alerts based on the system's confidence in the identified threat.",
           "type": "json",
           "name": "confidenceScoreRange",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Filter by confidence range (0-100) indicating how certain the system is about the threat Example: {\"from\": 50, \"to\": 75}"
+          "tooltip": "Specify a confidence score range between 0 and 100 to filter alerts based on the system's confidence in the identified threat. Example: {\"from\": 50, \"to\": 75}"
         },
         {
           "title": "Assigned To",
-          "description": "Specify a comma-separated list of user email addresses to filter alerts assigned to specific users.",
+          "description": "(Optional) Specify a comma-separated list of user email addresses to retrieve alerts assigned to those users.",
           "type": "text",
           "name": "assignedTo",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify a comma-separated list of user email addresses to filter alerts assigned to specific users. Example: [\"abc@example.com\", \"xyz@domain.com\"] or abc@example.com, xyz@domain.com",
+          "tooltip": "Specify a comma-separated list of user email addresses to retrieve alerts assigned to those users. Example: [\"abc@example.com\", \"xyz@domain.com\"] or abc@example.com, xyz@domain.com",
           "placeholder": "For e.g [\"abc@example.com\", \"xyz@domain.com\"] or abc@example.com, xyz@domain.com"
         },
         {
           "title": "Username",
-          "description": "Specify a comma-separated list of usernames to filter alerts by the users associated with them.",
+          "description": "(Optional) Specify a comma-separated list of usernames to filter alerts by associated users.",
           "type": "text",
           "name": "username",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify a comma-separated list of usernames to filter alerts by the users associated with them. Example: [\"USER1\", \"USER2\"] or USER1, USER2",
+          "tooltip": "Specify a comma-separated list of usernames to filter alerts by associated users. Example: [\"USER1\", \"USER2\"] or USER1, USER2",
           "placeholder": "For e.g [\"USER1\", \"USER2\"] or USER1, USER2"
         },
         {
           "title": "Create Time Range",
-          "description": "Filter by date/time ranges when alerts were created.",
+          "description": "(Optional) Specify a date and time range to retrieve alerts created during that period.",
           "type": "json",
           "name": "createTimeRange",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Filter by date/time ranges when alerts were created. Example: {\"from\": \"2019-02-08T17:32:28.000Z\", \"to\": \"2019-02-08T17:32:28.000Z\"}"
+          "tooltip": "Specify a date and time range to retrieve alerts created during that period. Example: {\"from\": \"2019-02-08T17:32:28.000Z\", \"to\": \"2019-02-08T17:32:28.000Z\"}"
         },
         {
           "title": "Update Time Range",
-          "description": "Filter by date/time ranges when alerts were updated.",
+          "description": "(Optional) Specify a date and time range to retrieve alerts updated during that period.",
           "type": "json",
           "name": "updateTimeRange",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Filter by date/time ranges when alerts were updated. Example: {\"from\": \"2019-02-08T17:32:28.000Z\", \"to\": \"2019-02-08T17:32:28.000Z\"}"
+          "tooltip": "Specify a date and time range to retrieve alerts updated during that period. Example: {\"from\": \"2019-02-08T17:32:28.000Z\", \"to\": \"2019-02-08T17:32:28.000Z\"}"
         },
         {
           "title": "Page Size",
-          "description": "Number of alerts to return per page.",
+          "description": "(Optional) Specify the number of alerts to retrieve per page.",
           "type": "integer",
           "name": "pageSize",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Number of alerts to return per page."
+          "tooltip": "Specify the number of alerts to retrieve per page."
         },
         {
           "title": "Scroll ID",
-          "description": "Specify the Scroll ID returned by a previous Retrieve Alerts response to retrieve the next page of results. When provided, all filter parameters above are ignored. Each scroll context remains active for 5 minutes.",
+          "description": "(Optional) Specify the scroll ID returned by a previous alert retrieval response to retrieve the next page of results. When you provide a scroll ID, the action ignores all other filter parameters. Each scroll context remains active for 5 minutes.",
           "type": "text",
           "name": "scrollID",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify the Scroll ID returned by a previous Retrieve Alerts response to retrieve the next page of results. When provided, all filter parameters above are ignored. Each scroll context remains active for 5 minutes."
+          "tooltip": "Specify the scroll ID returned by a previous alert retrieval response to retrieve the next page of results. When you provide a scroll ID, the action ignores all other filter parameters. Each scroll context remains active for 5 minutes."
         },
         {
           "title": "Tenant ID",
-          "description": "Override the default Tenant ID configured in the connector for this action. Required when using a Global Auth Key.",
+          "description": "(Optional) Override the tenant ID configured in the connector for this action. This parameter is required when using a Global Auth Key.",
           "type": "text",
           "name": "tenantID",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Override the default Tenant ID configured in the connector for this action. Required when using a Global Auth Key."
+          "tooltip": "Override the tenant ID configured in the connector for this action. This parameter is required when using a Global Auth Key."
         }
       ],
       "output_schema": {
@@ -226,34 +226,34 @@
     {
       "title": "Close Alert",
       "operation": "close_alert",
-      "description": "Closing an alert records investigation completion and sets status to CLOSED. Optional notes support audit and compliance.",
+      "description": "Closes an alert by setting its status to CLOSED. You can optionally provide closure notes to document the investigation outcome for auditing and compliance purposes.",
       "enabled": true,
       "category": "investigation",
       "annotation": "close_alert",
       "parameters": [
         {
           "title": "Alert ID",
-          "description": "Specify the unique Seceon OTM alert ID to close.",
+          "description": "Specify the unique Seceon OTM alert ID of the alert you want to close.",
           "type": "text",
           "name": "alertID",
           "required": true,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify the unique Seceon OTM alert ID to close."
+          "tooltip": "Specify the unique Seceon OTM alert ID of the alert you want to close."
         },
         {
           "title": "Closure Notes",
-          "description": "Specify the closure notes explaining the reason for closing the alert.",
+          "description": "(Optional) Specify notes explaining the reason for closing the alert.",
           "type": "text",
           "name": "closureNotes",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify the closure notes explaining the reason for closing the alert."
+          "tooltip": "Specify notes explaining the reason for closing the alert."
         },
         {
           "title": "Performed By",
-          "description": "Specify the email address of the analyst or system performing the closure action.",
+          "description": "(Optional) Specify the email address of the analyst or system performing the closure action.",
           "type": "text",
           "name": "performedBy",
           "required": false,
@@ -263,24 +263,24 @@
         },
         {
           "title": "Is Enforced",
-          "description": "If enabled, Seceon OTM treats the provided information as authoritative and skips additional validation checks.",
+          "description": "(Optional) Enable this option to instruct Seceon OTM to treat the provided information as authoritative and skip additional validation checks. By default, this option is Disabled.",
           "type": "checkbox",
           "name": "isEnforced",
           "required": false,
           "visible": true,
           "editable": true,
           "value": false,
-          "tooltip": "If enabled, Seceon OTM treats the provided information as authoritative and skips additional validation checks."
+          "tooltip": "Enable this option to instruct Seceon OTM to treat the provided information as authoritative and skip additional validation checks. By default, this option is Disabled."
         },
         {
           "title": "Tenant ID",
-          "description": "Override the default Tenant ID configured in the connector for this action. Required when using a Global Auth Key.",
+          "description": "(Optional) Override the tenant ID configured in the connector for this action. This parameter is required when using a Global Auth Key.",
           "type": "text",
           "name": "tenantID",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Override the default Tenant ID configured in the connector for this action. Required when using a Global Auth Key."
+          "tooltip": "Override the tenant ID configured in the connector for this action. This parameter is required when using a Global Auth Key."
         }
       ],
       "output_schema": {
@@ -316,127 +316,127 @@
     {
       "title": "Search Threat Indicator Alert",
       "operation": "search_threat_indicator_alert",
-      "description": "Retrieve all threat indicators (evidence) that contributed to a specific alert. Threat indicators are the underlying suspicious events that, when correlated, triggered the alert.",
+      "description": "Retrieves the threat indicators (evidence) associated with a specific alert. These indicators represent the underlying suspicious events that triggered to the alert.",
       "enabled": true,
       "category": "investigation",
       "annotation": "search_threat_indicator_alert",
       "parameters": [
         {
           "title": "Alert ID",
-          "description": "Specify the unique Seceon OTM alert ID to search for threat indicators.",
+          "description": "Specify the unique Seceon OTM alert ID for which you want to retrieve threat indicators.",
           "type": "text",
           "name": "alertID",
           "required": true,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify the unique Seceon OTM alert ID to search for threat indicators."
+          "tooltip": "Specify the unique Seceon OTM alert ID for which you want to retrieve threat indicators."
         },
         {
           "title": "Source IPs",
-          "description": "Specify a comma-separated list of source IP addresses to filter threat indicators by.",
+          "description": "(Optional) Specify a comma-separated list of source IP addresses to filter the threat indicators.",
           "type": "text",
           "name": "sourceIP",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify a comma-separated list of source IP addresses to filter threat indicators by. Example: [\"10.10.10.100\", \"192.168.19.100\"] or 10.10.10.100, 192.168.19.100",
+          "tooltip": "Specify a comma-separated list of source IP addresses to filter the threat indicators. Example: [\"10.10.10.100\", \"192.168.19.100\"] or 10.10.10.100, 192.168.19.100",
           "placeholder": "For e.g [\"10.10.10.100\", \"192.168.19.100\"] or 10.10.10.100, 192.168.19.100"
         },
         {
           "title": "Destination IPs",
-          "description": "Specify a comma-separated list of destination IP addresses to filter threat indicators by.",
+          "description": "(Optional) Specify a comma-separated list of destination IP addresses to filter the threat indicators.",
           "type": "text",
           "name": "destinationIP",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify a comma-separated list of destination IP addresses to filter threat indicators by. Example: [\"10.11.12.150\", \"192.168.19.3\"] or 10.11.12.150, 192.168.19.3",
+          "tooltip": "Specify a comma-separated list of destination IP addresses to filter the threat indicators. Example: [\"10.11.12.150\", \"192.168.19.3\"] or 10.11.12.150, 192.168.19.3",
           "placeholder": "For e.g [\"10.11.12.150\", \"192.168.19.3\"] or 10.11.12.150, 192.168.19.3"
         },
         {
           "title": "Event Origin",
-          "description": "Specify a comma-separated list of origin sources to filter threat indicators by.",
+          "description": "(Optional) Specify a comma-separated list of event origins to filter the threat indicators.",
           "type": "text",
           "name": "eventOrigin",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify a comma-separated list of origin sources to filter threat indicators by. Example: [\"Network\", \"Machine Learning\"] or Network, Machine Learning",
+          "tooltip": "Specify a comma-separated list of event origins to filter the threat indicators. Example: [\"Network\", \"Machine Learning\"] or Network, Machine Learning",
           "placeholder": "For e.g [\"Network\", \"Machine Learning\"] or Network, Machine Learning"
         },
         {
           "title": "Event Type Name",
-          "description": "Specify a comma-separated list of event type names to filter threat indicators by.",
+          "description": "(Optional) Specify a comma-separated list of event type names to filter the threat indicators.",
           "type": "text",
           "name": "eventTypeName",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify a comma-separated list of event type names to filter threat indicators by. Example: [\"Data Upload\", \"New Connection\"] or Data Upload, New Connection",
+          "tooltip": "Specify a comma-separated list of event type names to filter the threat indicators. Example: [\"Data Upload\", \"New Connection\"] or Data Upload, New Connection",
           "placeholder": "For e.g [\"Data Upload\", \"New Connection\"] or Data Upload, New Connection"
         },
         {
           "title": "Source Data Type",
-          "description": "Specify a comma-separated list of source data type to filter threat indicators by.",
+          "description": "(Optional) Specify a comma-separated list of source data types to filter the threat indicators.",
           "type": "text",
           "name": "sourceDataType",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify a comma-separated list of source data type to filter threat indicators by. Example: [\"netflow\", \"Linux\"] or netflow, Linux",
+          "tooltip": "Specify a comma-separated list of source data types to filter the threat indicators. Example: [\"netflow\", \"Linux\"] or netflow, Linux",
           "placeholder": "For e.g [\"netflow\", \"Linux\"] or netflow, Linux"
         },
         {
           "title": "Username",
-          "description": "Specify a comma-separated list of username to filter threat indicators by.",
+          "description": "(Optional) Specify a comma-separated list of usernames to filter the threat indicators.",
           "type": "text",
           "name": "userName",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify a comma-separated list of username to filter threat indicators by. Example: [\"USER1\", \"USER2\"] or USER1, USER2",
+          "tooltip": "Specify a comma-separated list of usernames to filter the threat indicators. Example: [\"USER1\", \"USER2\"] or USER1, USER2",
           "placeholder": "For e.g [\"USER1\", \"USER2\"] or USER1, USER2"
         },
         {
           "title": "Timestamp Range",
-          "description": "Filter threat indicators by timestamp range",
+          "description": "(Optional) Specify a timestamp range to filter the threat indicators.",
           "type": "json",
           "name": "timestampRange",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Filter threat indicators by timestamp range. Example: {\"from\": \"2024-01-01T00:00:00.000Z\", \"to\": \"2024-01-31T23:59:59.000Z\"}"
+          "tooltip": "Specify a timestamp range to filter the threat indicators. Example: {\"from\": \"2024-01-01T00:00:00.000Z\", \"to\": \"2024-01-31T23:59:59.000Z\"}"
         },
         {
           "title": "Page Size",
-          "description": "Number of threat indicators to return per page. Minimum 10, maximum 500. Default is 20.",
+          "description": "(Optional) Specify the number of threat indicators to retrieve per page. The minimum is 10, the maximum is 500, and the default is 20.",
           "type": "integer",
           "name": "pageSize",
           "required": false,
           "visible": true,
           "editable": true,
           "value": 20,
-          "tooltip": "Number of threat indicators to return per page. Minimum 10, maximum 500. Default is 20."
+          "tooltip": "Specify the number of threat indicators to retrieve per page. The minimum is 10, the maximum is 500, and the default is 20."
         },
         {
           "title": "Scroll ID",
-          "description": "Specify the Scroll ID returned by a previous Retrieve Alerts response to retrieve the next page of results. When provided, all filter parameters above are ignored. Each scroll context remains active for 5 minutes.",
+          "description": "(Optional) Specify the scroll ID returned by a previous threat indicator retrieval response to retrieve the next page of results. When you provide a scroll ID, the action ignores all other filter parameters. Each scroll context remains active for 5 minutes.",
           "type": "text",
           "name": "scrollID",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify the Scroll ID returned by a previous Retrieve Alerts response to retrieve the next page of results. When provided, all filter parameters above are ignored. Each scroll context remains active for 5 minutes."
+          "tooltip": "Specify the scroll ID returned by a previous threat indicator retrieval response to retrieve the next page of results. When you provide a scroll ID, the action ignores all other filter parameters. Each scroll context remains active for 5 minutes."
         },
         {
           "title": "Tenant ID",
-          "description": "Override the default Tenant ID configured in the connector for this action. Required when using a Global Auth Key.",
+          "description": "(Optional) Override the tenant ID configured in the connector for this action. This parameter is required when using a Global Auth Key.",
           "type": "text",
           "name": "tenantID",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Override the default Tenant ID configured in the connector for this action. Required when using a Global Auth Key."
+          "tooltip": "Override the tenant ID configured in the connector for this action. This parameter is required when using a Global Auth Key."
         }
       ],
       "output_schema": {
@@ -505,14 +505,14 @@
     {
       "title": "Execute API Request",
       "operation": "execute_api_request",
-      "description": "Execute an arbitrary HTTP request against the Seceon OTM REST API. Use this for endpoints not exposed as dedicated operations. The tenant_id from the connector configuration is applied automatically; override it via the Tenant ID parameter when needed.",
+      "description": "Sends a custom HTTP request to the Seceon OTM REST API. Use this action to access API endpoints that are not available through dedicated connector actions. The connector automatically applies the configured tenant ID. You can override it using the Tenant ID input parameter.",
       "enabled": true,
       "category": "investigation",
       "annotation": "execute_api_request",
       "parameters": [
         {
           "title": "HTTP Method",
-          "description": "Select the HTTP method to use for the request.",
+          "description": "Select the HTTP method to use for the API request. Supported values are GET, POST, PUT, DELETE, and PATCH.",
           "type": "select",
           "name": "method",
           "required": true,
@@ -528,48 +528,48 @@
           "value": [
             "GET"
           ],
-          "tooltip": "Select the HTTP method. Allowed values: GET, POST, PUT, DELETE, PATCH."
+          "tooltip": "Select the HTTP method to use for the API request. Supported values are GET, POST, PUT, DELETE, and PATCH."
         },
         {
           "title": "Endpoint",
-          "description": "Specify the API endpoint path, beginning with /.",
+          "description": "Specify the API endpoint path. The path must begin with a forward slash (/).",
           "type": "text",
           "name": "endpoint",
           "required": true,
           "visible": true,
           "editable": true,
-          "tooltip": "Specify the API endpoint path beginning with /. Example: /api/v1/alert/search",
+          "tooltip": "Specify the API endpoint path. The path must begin with a forward slash (/). Example: /api/v1/alert/search",
           "placeholder": "For e.g /api/v1/alert/search"
         },
         {
           "title": "Query Parameters",
-          "description": "Optional JSON object of query string parameters to append to the request URL.",
+          "description": "(Optional) Specify a JSON object containing query string parameters to append to the request URL.",
           "type": "json",
           "name": "queryParams",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Optional JSON object of query parameters. Example: {\"size\": 50}"
+          "tooltip": "Specify a JSON object containing query string parameters to append to the request URL. Example: {\"size\": 50}"
         },
         {
           "title": "Request Body",
-          "description": "Optional JSON body to send with POST, PUT, or PATCH requests.",
+          "description": "(Optional) Specify a JSON request body for POST, PUT, or PATCH requests.",
           "type": "json",
           "name": "requestBody",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Optional JSON body for POST, PUT, or PATCH requests. Example: {\"alert_type\": \"Brute Force Attack\"}"
+          "tooltip": "Specify a JSON request body for POST, PUT, or PATCH requests. Example: {\"alert_type\": \"Brute Force Attack\"}"
         },
         {
           "title": "Tenant ID",
-          "description": "Override the default Tenant ID configured in the connector for this action.",
+          "description": "Override the tenant ID configured in the connector for this action. This parameter is required when using a Global Auth Key.",
           "type": "text",
           "name": "tenantID",
           "required": false,
           "visible": true,
           "editable": true,
-          "tooltip": "Override the default Tenant ID configured in the connector for this action. Required when using a Global Auth Key."
+          "tooltip": "Override the tenant ID configured in the connector for this action. This parameter is required when using a Global Auth Key."
         }
       ],
       "output_schema": {}
