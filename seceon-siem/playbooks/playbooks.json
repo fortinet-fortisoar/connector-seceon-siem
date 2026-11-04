@@ -60,7 +60,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Searches for alerts in Seceon OTM using one or more filter criteria.",
+          "description": "Retrieves alerts from Seceon OTM based on one or more filter criteria.",
           "name": "Get All Alerts",
           "tag": "#Seceon SIEM",
           "recordTags": [
@@ -134,7 +134,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Closing an alert records investigation completion and sets status to CLOSED. Optional notes support audit and compliance.",
+          "description": "Closes an alert by setting its status to CLOSED. You can optionally provide closure notes to document the investigation outcome for auditing and compliance purposes.",
           "name": "Close Alert",
           "tag": "#Seceon SIEM",
           "recordTags": [
@@ -214,7 +214,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieve all threat indicators (evidence) that contributed to a specific alert. Threat indicators are the underlying suspicious events that, when correlated, triggered the alert.",
+          "description": "Retrieves the threat indicators (evidence) associated with a specific alert. These indicators represent the underlying suspicious events that triggered to the alert.",
           "name": "Search Threat Indicator Alert",
           "tag": "#Seceon SIEM",
           "recordTags": [
@@ -290,7 +290,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Execute an arbitrary HTTP request against the Seceon OTM REST API. Use this for endpoints not exposed as dedicated operations. The tenant_id from the connector configuration is applied automatically; override it via the Tenant ID parameter when needed.",
+          "description": "Sends a custom HTTP request to the Seceon OTM REST API. Use this action to access API endpoints that are not available through dedicated connector actions. The connector automatically applies the configured tenant ID. You can override it using the Tenant ID input parameter.",
           "name": "Execute API Request",
           "tag": "#Seceon SIEM",
           "recordTags": [
